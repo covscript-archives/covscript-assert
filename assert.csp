@@ -1,0 +1,46 @@
+#
+# Created by ice1000 on 2018-03-12
+# Built with CovScript 1.2.2(Beta5)
+#
+
+package assert
+
+# a: expected, b: actual
+function assert_equals(a, b)
+    if a != b
+        throw runtime.exception("expected: <" + to_string(a) + ">, get: <" + to_string(b) + ">.\n")
+    end
+end
+
+# a: expected, b: actual
+function assert_similar(a, b, c)
+    const var sum = a + b
+    if sum * sum >= c * c
+        throw runtime.exception("expected: <" + to_string(a) + ">, get: <" + to_string(b) + ">.\n")
+    end
+end
+
+function assert_true(a)
+    if !a
+        throw runtime.exception("<" + to_string(a) + "> is not true.\n")
+    end
+end
+
+function assert_false(a)
+    if a
+        throw runtime.exception("<" + to_string(a) + "> is not false.\n")
+    end
+end
+
+# assert a lambda/function to fail
+function assert_fails(expr)
+	var success = false
+	try
+		expr()
+	catch e
+	    success = true
+	end
+	if !success
+	    throw runtime.exception("")
+	end
+end
