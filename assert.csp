@@ -8,27 +8,39 @@ package assert
 # a: expected, b: actual
 function assert_equals(a, b)
     if a != b
-        throw runtime.exception("expected: <" + to_string(a) + ">, get: <" + to_string(b) + ">.\n")
+        throw runtime.exception("values are not equaled\n")
     end
 end
 
 # a: expected, b: actual
 function assert_similar(a, b, c)
-    const var sum = a + b
+    var sum = a + b
     if sum * sum >= c * c
-        throw runtime.exception("expected: <" + to_string(a) + ">, get: <" + to_string(b) + ">.\n")
+        throw runtime.exception("values are not similar\n")
     end
 end
 
 function assert_true(a)
     if !a
-        throw runtime.exception("<" + to_string(a) + "> is not true.\n")
+        throw runtime.exception("value is not true.\n")
     end
 end
 
 function assert_false(a)
     if a
-        throw runtime.exception("<" + to_string(a) + "> is not false.\n")
+        throw runtime.exception("value is not false.\n")
+    end
+end
+
+function assert_null(a)
+    if a != null
+        throw runtime.exception("value is not null.\n")
+    end
+end
+
+function assert_not_null(a)
+    if a == null
+        throw runtime.exception("value is null.\n")
     end
 end
 
@@ -41,6 +53,6 @@ function assert_fails(expr)
 	    success = true
 	end
 	if !success
-	    throw runtime.exception("")
+	    throw runtime.exception("function has successfully exited, which is unexpected")
 	end
 end
