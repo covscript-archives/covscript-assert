@@ -14,7 +14,7 @@ end
 
 # a: expected, b: actual
 function assert_similar(a, b, c)
-    var sum = a + b
+    var sum = a - b
     if sum * sum >= c * c
         throw runtime.exception("values are not similar\n")
     end
@@ -53,6 +53,6 @@ function assert_fails(expr)
 	    success = true
 	end
 	if !success
-	    throw runtime.exception("function has successfully exited, which is unexpected")
+	    throw runtime.exception("function has successfully exited, which is unexpected\n")
 	end
 end
